@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal Donasi Panti Asuhan — Donasi Online dengan Laporan Dana yang Transparan</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+/* ==========================================================================
+   Portal Donasi Panti Asuhan — style.css
+   Spesifikasi:
+   - .wadah { display: flex; gap: 24px; }
+   - Bersih, profesional, bebas visual clutter
+   ========================================================================== */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background-color: #f1f5f9;
+  color: #1e293b;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 32px 16px;
+}
+
+.container {
+  width: 100%;
+  max-width: 860px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 36px 32px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e2e8f0;
+}
+
+/* Page Header */
+.page-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.page-header h1 {
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 6px;
+  letter-spacing: -0.01em;
+}
+
+.page-header .subtitle {
+  font-size: 0.95rem;
+  color: #64748b;
+}
+
+/* ==========================================================================
+   CSS SPEC REQUIREMENT:
+   .wadah { display: flex; gap: 24px; }
+   Bungkus form dan tabel dalam satu wadah, lalu susun mendatar dengan jarak yang lega.
+   ========================================================================== */
+.wadah {
+  display: flex;
+  gap: 24px;
+  align-items: stretch;
+}
+
+@media (max-width: 720px) {
+  .wadah {
+    flex-direction: column;
+  }
+}
+
+/* Card Common */
+.card {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 24px 22px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.card h2 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #0f172a;
+  margin-bottom: 18px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+/* Form Donasi */
+.card-form form {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.card-form label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 6px;
+}
+
+.card-form input[type="text"] {
+  font-family: inherit;
+  font-size: 0.95rem;
+  padding: 10px 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  background-color: #ffffff;
+  color: #0f172a;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  margin-bottom: 14px;
+}
+
+.card-form input[type="text"]:focus {
+  border-color: #0f766e;
+  box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.15);
+}
+
+/* Status Error Validasi Minimal */
+.card-form input[type="text"].error {
+  border-color: #dc2626 !important;
+  background-color: #fff5f5;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15);
+}
+
+.bantuan {
+  font-size: 0.8rem;
+  color: #64748b;
+  margin-top: -8px;
+  margin-bottom: 20px;
+  transition: color 0.15s ease;
+}
+
+.bantuan.error {
+  color: #dc2626;
+  font-weight: 600;
+}
+
+.card-form button[type="submit"] {
+  margin-top: auto;
+  width: 100%;
+  padding: 12px 18px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: #0f766e;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.15s ease, transform 0.05s ease;
+}
+
+.card-form button[type="submit"]:hover {
+  background-color: #115e59;
+}
+
+.card-form button[type="submit"]:active {
+  transform: translateY(1px);
+}
+
+/* Tabel Laporan Penggunaan Dana */
+.card-laporan table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.card-laporan th,
+.card-laporan td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.card-laporan th {
+  background-color: #f8fafc;
+  color: #475569;
+  font-weight: 600;
+  border-top: 1px solid #f1f5f9;
+}
+
+.card-laporan td:last-child,
+.card-laporan th:last-child {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.card-laporan tfoot td {
+  font-weight: 700;
+  color: #0f172a;
+  background-color: #f8fafc;
+  border-top: 2px solid #e2e8f0;
+  border-bottom: none;
+}
+
+.note {
+  margin-top: 14px;
+  font-size: 0.8rem;
+  color: #64748b;
+  font-style: italic;
+}
+
+/* Page Footer */
+.page-footer {
+  text-align: center;
+  margin-top: 28px;
+  padding-top: 16px;
+  border-top: 1px solid #f1f5f9;
+}
+
+.page-footer p {
+  font-size: 0.825rem;
+  color: #94a3b8;
+}
+
+  </style>
+</head>
+<body>
+  <main class="container">
+    <header class="page-header">
+      <h1>Portal Donasi Panti Asuhan</h1>
+      <p class="subtitle">Donasi online dengan laporan dana yang transparan</p>
+    </header>
+
+    <!-- CSS: .wadah { display: flex; gap: 24px } -->
+    <div class="wadah">
+      <!-- FRM-1 / FRM-2 / FRM-3 / FRM-4 : Form Donasi -->
+      <section class="card card-form" aria-labelledby="judul-form">
+        <h2 id="judul-form">Form Donasi</h2>
+        <form id="form-donasi" action="#" method="get" novalidate>
+          <label for="nama-donatur">Nama Donatur</label>
+          <input
+            type="text"
+            id="nama-donatur"
+            name="nama"
+            value="Hamba Allah"
+            placeholder="Hamba Allah"
+            autocomplete="off"
+          >
+
+          <label for="nominal">Nominal Donasi</label>
+          <input
+            type="text"
+            id="nominal"
+            name="nominal"
+            inputmode="numeric"
+            placeholder="Rp 10.000"
+            value="Rp 5.000"
+            autocomplete="off"
+            aria-describedby="bantuan-minimal"
+          >
+          <p class="bantuan" id="bantuan-minimal">Minimal Rp 10.000</p>
+
+          <button type="submit">Kirim Donasi</button>
+        </form>
+      </section>
+
+      <!-- LPR-1 / LPR-2 / LPR-3 / LPR-4 : Laporan Penggunaan Dana -->
+      <section class="card card-laporan" aria-labelledby="judul-laporan">
+        <h2 id="judul-laporan">Laporan Dana &middot; September</h2>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Tanggal</th>
+              <th scope="col">Rincian</th>
+              <th scope="col">Nominal</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>05 Sep</td>
+              <td>Sembako</td>
+              <td>Rp 2.000.000</td>
+            </tr>
+            <tr>
+              <td>12 Sep</td>
+              <td>Pendidikan</td>
+              <td>Rp 1.500.000</td>
+            </tr>
+            <tr>
+              <td>20 Sep</td>
+              <td>Kesehatan</td>
+              <td>Rp 1.000.000</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="2">Total Tersalurkan</td>
+              <td>Rp 4.500.000</td>
+            </tr>
+          </tfoot>
+        </table>
+        <p class="note">Laporan bulan lalu — diperbarui setiap awal bulan.</p>
+      </section>
+    </div>
+
+    <footer class="page-footer">
+      <p>Terima kasih atas kepedulian Anda terhadap anak-anak panti asuhan.</p>
+    </footer>
+  </main>
+
+  <script>
+    (function () {
+      var inputNama = document.getElementById('nama-donatur');
+      var inputNominal = document.getElementById('nominal');
+      var form = document.getElementById('form-donasi');
+      var bantuan = document.getElementById('bantuan-minimal');
+
+      var MINIMAL = 10000;
+
+      function parseRupiah(str) {
+        if (str == null) return NaN;
+        var digits = String(str).replace(/[^0-9]/g, '');
+        if (digits === '') return NaN;
+        return parseInt(digits, 10);
+      }
+
+      function formatRupiah(n) {
+        return 'Rp ' + n.toLocaleString('id-ID');
+      }
+
+      // PRM-1 / PRM-2 / PRM-3 / PRM-4 : Prompt nama saat halaman pertama dibuka
+      function mintaNama() {
+        var nama = prompt('Masukkan nama donatur (kosongkan jika Hamba Allah)');
+        if (nama === null || nama.trim() === '') {
+          nama = 'Hamba Allah';
+        } else {
+          nama = nama.trim();
+        }
+        inputNama.value = nama;
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', mintaNama);
+      } else {
+        setTimeout(mintaNama, 300);
+      }
+
+      function tandaiError(isError) {
+        inputNominal.classList.toggle('error', isError);
+        bantuan.classList.toggle('error', isError);
+      }
+
+      // Hapus status error saat pengguna mengetik ulang
+      inputNominal.addEventListener('input', function () {
+        tandaiError(false);
+      });
+
+      // VLD-1 / VLD-2 / VLD-3 : Validasi nominal minimal + submit
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        var nama = inputNama.value.trim() === '' ? 'Hamba Allah' : inputNama.value.trim();
+        inputNama.value = nama;
+
+        var nominal = parseRupiah(inputNominal.value);
+
+        if (isNaN(nominal)) {
+          tandaiError(true);
+          alert('Donasi gagal: masukkan nominal donasi yang valid (minimal Rp 10.000)');
+          inputNominal.focus();
+          return;
+        }
+
+        // VLD-2 : Nominal < 10.000 → tolak submit + alert()
+        if (nominal < MINIMAL) {
+          tandaiError(true);
+          alert('Donasi gagal: Nominal donasi minimal Rp 10.000');
+          inputNominal.focus();
+          return;
+        }
+
+        // VLD-3 : Nominal ≥ 10.000 → sukses
+        tandaiError(false);
+        alert('Terima kasih, ' + nama + '! Donasi Anda sebesar ' + formatRupiah(nominal) + ' telah kami terima.');
+        form.reset();
+        inputNama.value = nama;
+      });
+    })();
+  </script>
+</body>
+</html>
